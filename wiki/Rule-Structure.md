@@ -76,7 +76,7 @@ Step 1: Load 01-rules/ directory
   ├─ 01-memory.md
   ├─ 02-error-documentation.md
   ├─ 03-lessons-learned.md
-  ├─ 04-archiecture-understanding.md
+  ├─ 04-architecture-understanding.md
   ├─ 05-directory-structure.md
   └─ 06-rules_v1.md
 

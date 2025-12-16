@@ -36,7 +36,7 @@ rules/
 │   ├── 01-memory.md            # [Category: Memory] Memory Bank structure
 │   ├── 02-error-documentation.md # [Category: Memory] Error tracking
 │   ├── 03-lessons-learned.md   # [Category: Memory] Learning journal
-│   ├── 04-archiecture-understanding.md # [Category: Context] Architecture
+│   ├── 04-architecture-understanding.md # [Category: Context] Architecture
 │   ├── 05-directory-structure.md # [Category: Context] Project structure
 │   └── 06-rules_v1.md          # [Category: Principles] Best practices
 ├── 02-rules-architect/          # Planning workflow

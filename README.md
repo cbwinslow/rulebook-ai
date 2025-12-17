@@ -54,6 +54,15 @@ This will create a `.rulebook-ai` directory to manage state, and populate `memor
 
 For a more detailed walkthrough of all features, see the [Step-by-Step Tutorial](memory/docs/user_guide/tutorial.md).
 
+## Documentation
+
+📚 **[Visit the Wiki](wiki/Home.md)** for comprehensive documentation:
+- **[Getting Started Guide](wiki/Getting-Started.md)**: Installation and first steps
+- **[Packs Overview](wiki/Packs-Overview.md)**: Detailed information about all available packs
+- **[Rules Categories](wiki/Rules-Categories.md)**: Complete guide to rule categories and groupings
+- **[Rule Structure](wiki/Rule-Structure.md)**: Understanding rule organization and loading
+- **[Advanced Topics](wiki/Advanced-Topics.md)**: Pack development, profiles, and customization
+
 ## Supported AI Assistants
 
 `rulebook-ai` supports generating rule files for multiple AI coding assistants. Supported assistants include: Cursor, Windsurf, Cline, RooCode, Kilo Code, Warp, GitHub Copilot, Claude Code, Codex CLI, and Gemini CLI.

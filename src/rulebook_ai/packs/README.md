@@ -18,6 +18,10 @@ Three distinct versions are provided, catering to different needs regarding deta
 
 All versions share the same fundamental goal: enabling more effective human-AI teamwork on projects ranging from simple tasks to complex epics.
 
+## Custom Pack
+
+- **`custom-rules-1/`**: Comprehensive engineering and automation rules pack for durable AI-assisted development.
+
 ## Directory Layout
 
 Each version resides in its own subdirectory:

@@ -232,7 +232,7 @@ class RuleManager:
             packs.append({"name": pack_dir.name, "version": version, "summary": summary})
         return packs
 
-    def list_packs(self) -> None:
+    def list_packs(self, community_only: bool = False, built_in_only: bool = False) -> None:
         builtins = self._builtin_packs()
         from . import community_packs
 
@@ -240,17 +240,23 @@ class RuleManager:
 
         print("Available packs:")
 
-        all_packs_to_sort = [{**b, "source": "built-in"} for b in builtins] + [
-            {
-                "name": p.get("name"),
-                "summary": p.get("description"),
-                "source": "community",
-                "username": p.get("username"),
-                "repo": p.get("repo"),
-                "path": p.get("path", ""),
-            }
-            for p in index
-        ]
+        all_packs_to_sort = []
+        if not community_only:
+            all_packs_to_sort.extend([{**b, "source": "built-in"} for b in builtins])
+        if not built_in_only:
+            all_packs_to_sort.extend(
+                [
+                    {
+                        "name": p.get("name"),
+                        "summary": p.get("description"),
+                        "source": "community",
+                        "username": p.get("username"),
+                        "repo": p.get("repo"),
+                        "path": p.get("path", ""),
+                    }
+                    for p in index
+                ]
+            )
 
         has_community_packs = any(p["source"] == "community" for p in all_packs_to_sort)
 
@@ -277,6 +283,21 @@ class RuleManager:
             print("\nTo see community packs, run 'rulebook-ai packs update'.")
 
         print(f"\nFor ratings and reviews of these packs, visit {RATINGS_REVIEWS_URL}")
+
+    def search_community_packs(self, query: str, limit: int = 10, update: bool = False) -> int:
+        from .search import search_community_index, update_and_search
+
+        results = update_and_search(query, limit=limit) if update else search_community_index(query, limit=limit)
+        if not results:
+            print("No community packs matched your query.")
+            return 0
+
+        print("Community pack matches:")
+        for entry in results:
+            name = entry.get("name")
+            desc = entry.get("description")
+            print(f"  - {name}: {desc}")
+        return 0
 
     def add_pack(self, name_or_path: str, project_dir: Optional[str] = None) -> int:
         project_root = Path(project_dir).absolute() if project_dir else self.project_root
@@ -710,4 +731,3 @@ class RuleManager:
         except Exception:
             pass
         return 0
-

@@ -26,6 +26,8 @@ def create_parser() -> argparse.ArgumentParser:
 
     list_parser = packs_sub.add_parser("list", help="List available packs")
     list_parser.add_argument("--project-dir", "-p")
+    list_parser.add_argument("--community", action="store_true", help="Show only community packs")
+    list_parser.add_argument("--built-in", dest="built_in", action="store_true", help="Show only built-in packs")
 
     add_parser = packs_sub.add_parser("add", help="Add pack(s) to the library")
     add_parser.add_argument("names", nargs="+")
@@ -39,6 +41,11 @@ def create_parser() -> argparse.ArgumentParser:
         "update", help="Refresh community pack index"
     )
     update_parser.add_argument("--project-dir", "-p")
+
+    search_parser = packs_sub.add_parser("search", help="Search community packs")
+    search_parser.add_argument("--query", "-q", required=True)
+    search_parser.add_argument("--limit", "-n", type=int, default=10)
+    search_parser.add_argument("--update", action="store_true", help="Refresh index cache first")
 
     status_parser = packs_sub.add_parser("status", help="Show configured packs and profiles")
     status_parser.add_argument("--project-dir", "-p")
@@ -132,7 +139,7 @@ def handle_command(args: argparse.Namespace) -> int:
     if args.command == "packs":
         cmd = args.packs_command
         if cmd == "list":
-            rm.list_packs()
+            rm.list_packs(community_only=args.community, built_in_only=args.built_in)
             return 0
         if cmd == "add":
             rc = 0
@@ -150,6 +157,8 @@ def handle_command(args: argparse.Namespace) -> int:
             return rc
         if cmd == "update":
             return rm.update_community_index()
+        if cmd == "search":
+            return rm.search_community_packs(args.query, limit=args.limit, update=args.update)
         if cmd == "status":
             return rm.packs_status(project_dir)
 
@@ -217,4 +226,3 @@ def main(argv: Optional[List[str]] = None) -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-

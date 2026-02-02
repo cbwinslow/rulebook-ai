@@ -92,6 +92,10 @@ uvx rulebook-ai profiles activate dev
 
 # Code review phase
 uvx rulebook-ai profiles create review medium-spec
+
+# Example: project-specific profile
+uvx rulebook-ai profiles create sora-autopublisher medium-spec
+uvx rulebook-ai profiles add custom-rules-1 --to sora-autopublisher
 uvx rulebook-ai profiles activate review
 ```
 
